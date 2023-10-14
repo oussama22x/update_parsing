@@ -1,0 +1,2 @@
+all:
+	gcc -fsanitize=address -g3 -I /usr/local/include -L /usr/local/lib/ -lmlx -framework OpenGL -framework AppKit -fsanitize=address -g3 cub.c libft/ft_bzero.c libft/ft_strjoin.c libft/ft_strlen.c libft/ft_calloc.c libft/ft_split.c libft/ft_strdup.c   libft/ft_strnstr.c libft/ft_strchr.c   file.c get_line/get_next_line.c -o cub3d

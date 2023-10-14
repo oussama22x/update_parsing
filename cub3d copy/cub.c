@@ -164,7 +164,9 @@ int check_extionts(char *argv)
 }
 int check_final(t_textr *txtr)
 {
-    //check for error txter                                   
+    //check for error txter 
+    //almost finish
+    
 }
 int main(int argc, char *argv[])
 {

@@ -20,7 +20,6 @@ void count_x_y_of_the_map(t_all **all)
 }
 int updatemap(t_all *all)
 {
-    char **updated_map;
     int x; 
     int i;
     int len;
@@ -41,30 +40,6 @@ int updatemap(t_all *all)
     return(len);
 }
 
-
-void fix_map(t_all **all, int len)
-{
-    char **new_map;
-    int i;
-    int x;
-    i = 0;
-    x = 0; 
-    
-    new_map =  calloc(sizeof(char *) ,  (*all)->y_of_map + 1);
-    while(i <  (*all)->y_of_map)
-    {
-        new_map[i] = calloc(sizeof(char) , len + 1);
-        i++;
-    }
-    i = 0;
-    while(i < (*all)->y_of_map)
-    {
-        strcpy(new_map[i], (*all)->map[i]);
-        i++;
-    }
-    new_map[i] = NULL;
-    (*all)->map = new_map;
-}
 int check_if_close(char **map)
 {
   int i;
@@ -108,42 +83,7 @@ int check_if_close(char **map)
     }
   return (0);
 }
-int check_for_valid_map(char **map)
-{
-    int i;
-    int x;
-    i = 0;
-    x = 0;
-    
-    while(map[i])
-    {
-        x = 0;
-        while (map[i][x])
-        {
-            if(map[i][x] == '0')
-            {
-                if(i > 0 && (map[i - 1][x] == '\0' || map[i + 1][x] == '\0' || map[i - 1][x] == ' ' || map[i + 1][x] == ' '))
-                {
-                    printf("unvalid ;)\n");
-                    return(-1);
-                }
-                if(x > 0 && (map[i][x - 1] == '\0' ||map[i][x + 1] == '\0' || map[i][x - 1] == ' ' ||map[i][x + 1] == ' '))
-                {
-                    printf("unvalid :)\n");
-                    return(-1);
-                }
-            }
-            x++;
-        }
-        i++;
-    }
-    if(ft_strchr(map[i - 1], '0'))
-    {
-        printf("unvalid ;)\n");
-        return -1;
-    }
-    return(0);
-}
+
 int check_extionts(char *argv)
 {
     int i;
@@ -155,36 +95,10 @@ int check_extionts(char *argv)
         if(argv[i] == '.')
             if(strcmp((argv + i + 1), "cub"))
             {
-                printf("unvalid ext");
+                printf("unvalid exti");
                 return -1;
             }
             i++;
     }
     return(0);
 }
-int check_final(t_textr *txtr)
-{
-    //check for error txter 
-    //almost finish
-    
-}
-int main(int argc, char *argv[])
-{
-    t_all *all;
-    t_textr *txtr;
-    int len;
-    
-   if (check_extionts(argv[1]) == -1 || all_in_one(&all, &txtr, argv) == -1)
-        return(0);
-    len = updatemap(all);
-    count_x_y_of_the_map(&all);
-    fix_map(&all, len);
-    if((check_if_close(all->map)) == -1)
-        return -1;
-    if(check_for_valid_map(all->map) == -1)
-        return(-1);
-    if(check_final(txtr) == -1)
-        return (-1);
-    return(0);
-}
-

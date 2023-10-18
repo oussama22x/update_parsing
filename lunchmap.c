@@ -11,12 +11,11 @@
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
 char map[10][20] = {
         {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
         {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {1, 0, 0, 0, 0, 0, 'P', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1},
-        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+        {1, 0, 0, 0, 0, 0, 0 , 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1},
+        {1, 0, 0, 0, 0, 0, 0, 0, 'P', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
         {1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1},
         {1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1},
         {1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 1, 1, 1},
@@ -24,51 +23,9 @@ char map[10][20] = {
         {1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
         {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
     };
-// void key_hok(int key, t_data *data)
-// {
-//     if(key == 53)
-//         exit(0);
-//     if(key == 13)
-//     {
-//         data->pos_x += cos(data->angle) * 0.1;
-//         data->pos_y += sin(data->angle) * 0.1;
-//     }
-//     if(key == 1)
-//     {
-//         data->pos_x -= cos(data->angle) * 0.1;
-//         data->pos_y -= sin(data->angle) * 0.1;
-//     }
-//     if(key == 0)
-//     {
-//         data->pos_x -= cos(data->angle + M_PI_2) * 0.1;
-//         data->pos_y -= sin(data->angle + M_PI_2) * 0.1;
-//     }
-//     if(key == 2)
-//     {
-//         data->pos_x += cos(data->angle + M_PI_2) * 0.1;
-//         data->pos_y += sin(data->angle + M_PI_2) * 0.1;
-//     }
-//     if(key == 123)
-//         data->angle -= 0.1;
-//     if(key == 124)
-//         data->angle += 0.1;
-//     if(key == 126)
-//     {
-//         data->pos_x += cos(data->angle) * 0.1;
-//         data->pos_y += sin(data->angle) * 0.1;
-//     }
-//     if(key == 125)
-//     {
-//         data->pos_x -= cos(data->angle) * 0.1;
-//         data->pos_y -= sin(data->angle) * 0.1;
-//     }
-//     mlx_destroy_image(data->mlx_ptr, data->img);
-//     data->img = mlx_new_image(data->mlx_ptr, 1300, 900);
-//     data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel, &data->line_length,
-//                                 &data->endian);
-//     draw_map(data);
-//     mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img, 0, 0);
-// }
+
+
+
 
 void my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
@@ -172,9 +129,6 @@ void draw_map_1(t_data *data)
     color = 0x000000;
     dst = data->addr + ((int)(data->pos_y)  * data->line_length + ((int)data->pos_x) * (data->bits_per_pixel / 8));
              *(unsigned int *)dst = color;
-    // dst = data->addr + ((int)(data->ray_y)  * data->line_length + ((int)data->ray_x) * (data->bits_per_pixel / 8));
-    //         *(unsigned int *)dst = color;
-    
     draw_ray(data);
     mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->img, 0, 0);
 }
@@ -208,14 +162,6 @@ int move_player(int key, t_data *data)
         data->pos_x += cos(data->direction + M_PI_2) * 10;
         data->pos_y += sin(data->direction + M_PI_2) * 10;
     }
-    // if(key == 13)
-    // {
-    //     printf("%f() %f", sin(data->direction) * 10, cos(data->direction) * 10);
-    //     printf("%f | %f\n", data->pos_x, data->pos_y);
-    //  data->pos_y -=  sin(data->direction) * 10;
-    //  data->pos_x -=  cos(data->direction) * 10;
-    //  printf("%f |}| %f\n", data->pos_x, data->pos_y);
-    // }
     else if(key == 1 || key == 13)
     {
         printf("fds %d, %f", 1, data->direction);
@@ -237,13 +183,9 @@ int move_player(int key, t_data *data)
         data->pos_y = y;
         return (0);
     }
-    // if(key != 123 && key != 124)
-    {
     mlx_destroy_image(data->mlx_ptr, data->img);
     data->img = mlx_new_image(data->mlx_ptr, 1300, 900);
     draw_map(data);
-    }
-    // draw_ray(data);
     return (0);
 }
 void cast_ray(t_data data)
@@ -257,13 +199,28 @@ void cast_ray(t_data data)
     mlx_pixel_put(data.mlx_ptr, data.mlx_win, data.ray_x, data.ray_y, 0x00000);
   
 }
+void set_initial_player_position(t_data *data) {
+    int y = 0;
+    while (y < 10) {
+        int x = 0;
+        while (x < 20) {
+            if (map[y][x] == 'P') {
+                data->pos_x = x * (1300 / 20);
+                data->pos_y = y * (900 / 10);
+                
+                map[y][x] = 0;
+                return;
+            }
+            x++;
+        }
+        y++;
+    }
+}
+
 void show_map(t_all *all, t_textr *txt)
 {
     t_data *data;
-    // int i = -1;
-    // i -= 3;
-    // printf("%d\n", i);
-    // exit(0);
+
     data = malloc(sizeof(t_data));
     data->all = all;
     data->txt = txt;
@@ -277,8 +234,8 @@ void show_map(t_all *all, t_textr *txt)
     data->img = mlx_new_image(data->mlx_ptr, 1300, 900); 
 	data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel, &data->line_length,
 								&data->endian);
+    set_initial_player_position(data);
     draw_map(data);
-    // draw_ray(&data);
     mlx_hook(data->mlx_win, 2, 1L<<0, move_player, data);
     mlx_loop(data->mlx_ptr);
 }

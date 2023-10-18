@@ -33,6 +33,7 @@ void get_x_y_of_the_player(t_all **all)
          (*all)->x++;
     }
 }
+
 int all_in_one(t_all **all, t_textr **txtr,  char **argv)
 {
     (*all) = malloc(sizeof(t_all));

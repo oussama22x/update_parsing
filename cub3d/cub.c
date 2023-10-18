@@ -65,6 +65,61 @@ int helper(unsigned int *arr, char *str)
     return 0;
 }
 
+void    draw_square(int i, int j, t_all *all, int color)
+{
+    int x = 0;
+    int y = 0;
+
+    while (y < 64 - 1)
+    {
+        x = 0;
+        while (x < 64 - 1)
+        {
+            mlx_pixel_put(all->mlx,all->win, i * 64 + y + 1 , j * 64 + x + 1, color);
+            x++;
+        }
+        y++;
+    }
+}
+void open_window(t_all **all)
+{
+    int i;
+    int x;
+    int color;
+
+
+    i = 0;
+    x = 0;
+    (*all)->mlx = mlx_init();
+    (*all)->win = mlx_new_window((*all)->mlx, 66, (*all)->y_of_map * 64, "CUB3D");
+    (*all)->img = mlx_new_image((*all)->mlx, 896, (*all)->y_of_map * 64);
+    (*all)->addrs = mlx_get_data_addr((*all)->img, &(*all)->bits_per_pixel, &(*all)->size_line, &(*all)->endian);
+    while((*all)->map[x])
+    {
+        i = 0;
+        while((*all)->map[x][i])
+        {
+            if((*all)->map[x][i] == '1')
+            {
+                color = 0xFF5B38;
+                draw_square(x, i,(*all), color);
+            }
+            if((*all)->map[x][i] == '0')
+            {
+                color = 0xB5B5B0;
+                draw_square(x, i,(*all), color);
+            }
+            if((*all)->map[x][i] == 'N')
+            {
+                color = 0xB5B5B0;
+                draw_square(x, i,(*all), color);
+            }
+            i++;
+        }
+        x++;
+    }
+    mlx_loop((*all)->mlx);
+}
 int main(int argc, char *argv[])
 {
     t_all *all;
@@ -91,15 +146,16 @@ int main(int argc, char *argv[])
     }
     if(check_final(txtr) == -1)
     {
-       printf("ERROR\n");
+       printf("ERROR3\n");
         return (-1);
     }
     if(ft_atoi_num(txtr) ==  -1)
     {
-        printf("ERROR\n");
+        printf("ERROR4\n");
         return(-1);
     }
     get_colers(txtr);
+    open_window(&all);
    }
    else 
     printf("messing file map ☠️ 👽\n");

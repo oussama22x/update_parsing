@@ -24,8 +24,13 @@ typedef struct s_textr
 typedef struct s_all
 {
     char **map;
+    void *img;
+    char *addrs;
     void *mlx;
     void *win;
+    int bits_per_pixel;
+    int size_line;
+    int endian;
     int player_angel;
     int fd;
     int y;

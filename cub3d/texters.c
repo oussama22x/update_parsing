@@ -70,7 +70,9 @@ int ft_atoi_num(t_textr *txt)
     return 0;
 }
 
-unsigned int RGBtoUint8(int R, int G, int B) {
+unsigned int RGBtoUint8(int R, int G, int B) 
+{
+    printf("%lu\n\n", sizeof(int));
     return ((0xFF << 24) | (R << 16) | (G << 8) | B);
 }
 
@@ -78,4 +80,6 @@ void get_colers(t_textr *txtr)
 {
     txtr->C_CLOR = RGBtoUint8(txtr->C[0], txtr->C[1], txtr->C[2]);
     txtr->F_CLOR = RGBtoUint8(txtr->F[0], txtr->F[1], txtr->F[2]);
+    printf("%X\n", txtr->C_CLOR);
+    printf("%X\n", txtr->F_CLOR);
 }

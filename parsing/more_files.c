@@ -4,8 +4,7 @@ void init_all(t_all **all)
     (*all)->x = 0;
     (*all)->y = 0;
     (*all)->x_of_map = 0;
-    (*all)->y_of_map = 0;;
-    (*all)->player_angel = 0;
+    (*all)->y_of_map = 0;
     (*all)->map = NULL;
 }
 void count_x_y_of_the_map(t_all **all)

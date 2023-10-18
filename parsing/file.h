@@ -24,20 +24,14 @@ typedef struct s_textr
 typedef struct s_all
 {
     char **map;
-    void *img;
-    char *addrs;
-    void *mlx;
-    void *win;
-    int bits_per_pixel;
-    int size_line;
-    int endian;
     int player_angel;
     int fd;
     int y;
     int x;
-    int x_of_map;
-    int y_of_map;
+    int x_of_map;// 
+    int y_of_map;//the len of map
 } t_all;
+
 void get_map(t_all **all, int fd);
 int check_errors(char **map);
 void init_txters(t_textr **txtr, t_all *all);
